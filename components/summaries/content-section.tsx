@@ -2,12 +2,12 @@ import { parseEmojiPoint, parsePoint } from '@/utils/summary-helper';
 import { MotionDiv } from '../common/motion-wrapper';
 import { containerVariants, itemVariants } from '@/utils/constants';
 
-const EmojiPoint = ({ point, index }: { point: string; index: number }) => {
+const EmojiPoint = ({ point }: { point: string; index: number }) => {
   const { emoji, text } = parseEmojiPoint(point) ?? {};
 
   return (
     <MotionDiv
-      varients={itemVariants}
+      variants={itemVariants}
       className="group relative bg-gradient-to-br from-yellow-100/[0.1] to-yellow-300/[0.03] p-4 rounded-2xl border border-yellow-500/10 hover:shadow-lg transition-all"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
@@ -19,7 +19,7 @@ const EmojiPoint = ({ point, index }: { point: string; index: number }) => {
   );
 };
 
-const RegularPoint = ({ point, index }: { point: string; index: number }) => {
+const RegularPoint = ({ point }: { point: string; index: number }) => {
   return (
     <MotionDiv
       variants={itemVariants}
@@ -34,7 +34,6 @@ const RegularPoint = ({ point, index }: { point: string; index: number }) => {
 };
 
 export default function ContentSection({
-  title,
   points,
 }: {
   title: string;
