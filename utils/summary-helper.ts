@@ -1,34 +1,39 @@
-export const parseSection = (section: string) : {title : string; points: string[]} => {
-    const [title, ...content] = section.split('\n');
+export const parseSection = (
+  section: string
+): { title: string; points: string[] } => {
+  const [title, ...content] = section.split('\n');
 
-    const cleanTitle = title.startsWith('#') ? title.substring(1).trim() : title.trim();
+  const cleanTitle = title.startsWith('#')
+    ? title.substring(1).trim()
+    : title.trim();
 
-    const points: string[] = [];
+  const points: string[] = [];
 
-    let currentPoint = '';
+  let currentPoint = '';
 
-    content.forEach((line) => {
-        const trimmedLine = line.trim();
-        if (trimmedLine.startsWith('.')) {
-            currentPoint = trimmedLine;
-        } else if (!trimmedLine) {
-            if (currentPoint) points.push(currentPoint.trim());
-            currentPoint = '';
-        } else {
-            currentPoint += ' ' + trimmedLine;
-        }
-    })
-
-    if (currentPoint) points.push(currentPoint.trim());
-
-    return {
-        title: cleanTitle,
-        points: points.filter((point) => point && !point.startsWith('#') && !point.startsWith('[Choose'))
+  content.forEach((line) => {
+    const trimmedLine = line.trim();
+    if (trimmedLine.startsWith('.')) {
+      currentPoint = trimmedLine;
+    } else if (!trimmedLine) {
+      if (currentPoint) points.push(currentPoint.trim());
+      currentPoint = '';
+    } else {
+      currentPoint += ' ' + trimmedLine;
     }
+  });
+
+  if (currentPoint) points.push(currentPoint.trim());
+
+  return {
+    title: cleanTitle,
+    points: points.filter(
+      (point) => point && !point.startsWith('#') && !point.startsWith('[Choose')
+    ),
+  };
 };
 
 export function parsePoint(point: string) {
-    
   const isNumbered = /^\d+\./.test(point);
   const isMainPoint = /^\-/.test(point); // Assuming '-' indicates a main point
   // Replace the Unicode property escape with a simpler emoji detection

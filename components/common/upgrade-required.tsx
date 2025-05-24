@@ -19,13 +19,17 @@ export default function UpgradeRequired() {
             Subscription Required
           </h1>
           <p className="text-lg leading-8 border-2 backdrop-blur-xs rounded-lg p-6 border-dashed max-w-xl">
-            You need to upgrade to the Basic Plan or the Pro Plan to access this feature
+            You need to upgrade to the Basic Plan or the Pro Plan to access this
+            feature
           </p>
           <Button
             asChild
             className="bg-linear-to-r from-rose-500 to-rose-700 hover:from-rose-600 hover:to-rose-800 text-white"
           >
-            <Link href="/#pricing" className="flex gap-2 items-center hover:no-underline">
+            <Link
+              href="/#pricing"
+              className="flex gap-2 items-center hover:no-underline"
+            >
               View Pricing Plans <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>

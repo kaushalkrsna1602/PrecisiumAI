@@ -52,7 +52,9 @@ export function NavigationControls({
           disabled={currentSection === totalSections - 1}
           className={cn(
             'rounded-full w-12 h-12 transition-all duration-200 bg-linear-to-br from-rose-500 to-rose-600 backdrop-blur-xs border border-rose-500/10',
-            currentSection === totalSections - 1 ? 'opacity-50' : 'hover:bg-rose-500/20'
+            currentSection === totalSections - 1
+              ? 'opacity-50'
+              : 'hover:bg-rose-500/20'
           )}
         >
           <ChevronRight className="h-6 w-6" />

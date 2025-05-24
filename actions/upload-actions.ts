@@ -1,12 +1,12 @@
 'use server';
 
-import { getDbConnection } from "@/lib/db";
-import { generateSummaryFromGemini } from "@/lib/geminiai";
-import { fetchAndExtractPdfText } from "@/lib/langchain";
-import { generateSummaryFromOpenAI } from "@/lib/openai";
-import { formatFileNameAsTitle } from "@/utils/format-utils";
-import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
+import { getDbConnection } from '@/lib/db';
+import { generateSummaryFromGemini } from '@/lib/geminiai';
+import { fetchAndExtractPdfText } from '@/lib/langchain';
+import { generateSummaryFromOpenAI } from '@/lib/openai';
+import { formatFileNameAsTitle } from '@/utils/format-utils';
+import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
 
 interface PdfSummaryType {
   userId?: string;
@@ -16,11 +16,17 @@ interface PdfSummaryType {
   fileName: string;
 }
 
-export async function generatePdfSummary({fileUrl , fileName} : {fileUrl: string, fileName: string})  {
+export async function generatePdfSummary({
+  fileUrl,
+  fileName,
+}: {
+  fileUrl: string;
+  fileName: string;
+}) {
   if (!fileUrl) {
     return {
       success: false,
-      message: "File Upload failed",
+      message: 'File Upload failed',
       data: null,
     };
   }
@@ -28,7 +34,7 @@ export async function generatePdfSummary({fileUrl , fileName} : {fileUrl: string
   if (!fileUrl) {
     return {
       success: false,
-      message: "No file URL found",
+      message: 'No file URL found',
       data: null,
     };
   }
@@ -44,11 +50,14 @@ export async function generatePdfSummary({fileUrl , fileName} : {fileUrl: string
     } catch (error) {
       console.log(error);
       // call OPEN AI
-      if (error instanceof Error && error.message.includes("Rate limit exceeded")) {
+      if (
+        error instanceof Error &&
+        error.message.includes('Rate limit exceeded')
+      ) {
         try {
           summary = await generateSummaryFromOpenAI(pdfText);
         } catch (error) {
-          console.error("Error while generating summary:", error);
+          console.error('Error while generating summary:', error);
         }
       }
     }
@@ -56,7 +65,7 @@ export async function generatePdfSummary({fileUrl , fileName} : {fileUrl: string
     if (!summary) {
       return {
         success: false,
-        message: "Failed to generate summary",
+        message: 'Failed to generate summary',
         data: null,
       };
     }
@@ -65,17 +74,17 @@ export async function generatePdfSummary({fileUrl , fileName} : {fileUrl: string
 
     return {
       success: true,
-      message: "Summary generated successfully",
+      message: 'Summary generated successfully',
       data: {
         title: fileName,
         summary,
       },
     };
   } catch (error) {
-    console.error("Error while fetching or parsing PDF:", error);
+    console.error('Error while fetching or parsing PDF:', error);
     return {
       success: false,
-      message: "File Upload Failed",
+      message: 'File Upload Failed',
       data: null,
     };
   }
@@ -108,7 +117,7 @@ export async function savePdfSummary({
     `;
     return savedSummary;
   } catch (error) {
-    console.error("Error saving PDF summary:", error);
+    console.error('Error saving PDF summary:', error);
     return null;
   }
 }
@@ -148,25 +157,25 @@ export async function storePdfSummaryAction({
         message: 'Failed to save PDF summary. Please try again.',
       };
     }
-
-
   } catch (error) {
     console.error('Error saving PDF summary:', error); // Log the error for debugging
 
     return {
       success: false,
       message:
-        error instanceof Error ? `Error saving PDF summary: ${error.message}` : 'An unexpected error occurred while saving the PDF summary.',
+        error instanceof Error
+          ? `Error saving PDF summary: ${error.message}`
+          : 'An unexpected error occurred while saving the PDF summary.',
     };
   }
 
-  revalidatePath(`/summaries/${savedSummary.id}`)
+  revalidatePath(`/summaries/${savedSummary.id}`);
 
   return {
     success: true,
     message: 'PDF summary saved successfully.',
     data: {
       id: savedSummary.id,
-    }
+    },
   };
 }

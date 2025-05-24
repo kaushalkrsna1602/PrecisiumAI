@@ -1,4 +1,7 @@
-import {handleCheckoutSessionCompleted, handleSubscriptionDeleted} from '@/lib/payments';
+import {
+  handleCheckoutSessionCompleted,
+  handleSubscriptionDeleted,
+} from '@/lib/payments';
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
@@ -17,20 +20,20 @@ export const POST = async (req: NextRequest) => {
     switch (event.type) {
       case 'checkout.session.completed':
         console.log('Payment was successful!');
-        const sessionId = event.data.object.id
-        const session = await stripe.checkout.sessions.retrieve(sessionId , {
-            expand: ['line_items']
-        }); 
+        const sessionId = event.data.object.id;
+        const session = await stripe.checkout.sessions.retrieve(sessionId, {
+          expand: ['line_items'],
+        });
 
-        await handleCheckoutSessionCompleted({session , stripe})
+        await handleCheckoutSessionCompleted({ session, stripe });
         break;
 
       case 'customer.subscription.deleted':
-        console.log('Subscription was deleted!'); 
+        console.log('Subscription was deleted!');
         const subscription = event.data.object;
         const subscriptionId = event.data.object.id;
 
-        await handleSubscriptionDeleted({subscriptionId , stripe}) 
+        await handleSubscriptionDeleted({ subscriptionId, stripe });
         console.log(subscription);
         break;
 
@@ -39,11 +42,12 @@ export const POST = async (req: NextRequest) => {
     }
   } catch (err) {
     return NextResponse.json(
-        {error : "Failed to trigger webhook" , err}, 
-        {status : 400});
+      { error: 'Failed to trigger webhook', err },
+      { status: 400 }
+    );
   }
 
   return NextResponse.json({
-     status: "success" 
-    });
+    status: 'success',
+  });
 };

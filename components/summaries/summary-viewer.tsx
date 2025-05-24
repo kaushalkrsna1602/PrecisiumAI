@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
@@ -21,49 +21,51 @@ const SectionTitle = ({ title }: { title: string }) => {
 };
 
 export function SummaryViewer({ summary }: { summary: string }) {
-    const [currentSection, setCurrentSection] = useState(0);
+  const [currentSection, setCurrentSection] = useState(0);
 
-    const handleNext = () => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
+  const handleNext = () =>
+    setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
 
-    const handlePrevious = () => setCurrentSection((prev) => Math.max(prev - 1, 0));
+  const handlePrevious = () =>
+    setCurrentSection((prev) => Math.max(prev - 1, 0));
 
-    const handleSelectionSelect = (index: number) => {
-        setCurrentSection(Math.min(Math.max(index, 0), sections.length - 1));
-    }
+  const handleSelectionSelect = (index: number) => {
+    setCurrentSection(Math.min(Math.max(index, 0), sections.length - 1));
+  };
 
-    // parseSummary
-    const sections = summary
-        .split('\n#')
-        .map((section) => section.trim())
-        .filter(Boolean)
-        .map(parseSection);
+  // parseSummary
+  const sections = summary
+    .split('\n#')
+    .map((section) => section.trim())
+    .filter(Boolean)
+    .map(parseSection);
 
-    return (
-        <Card
-            className="relative px-2 h-[500px] sm:h-[600px] lg:h-[700px] w-full xl:w-[600px] overflow-hidden bg-linear-to-br from-background via-background/95 to-rose-500/5 backdrop-blur-lg shadow-2xl rounded-3xl border border-rose-500/10"
-        >
-        <ProgressBar sections={sections} currentSection={currentSection} />
-            <MotionDiv key={currentSection} 
-            initial={{ opacity: 0, }}
-            whileInView={{ opacity: 1,}}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}   
-            exit={{ opacity: 0 }}
-            className="h-full overflow-y-auto scrollbar-hide pt-12 sm:pt-16 pb-20 sm:pb-24">
-                <div className="px-4 sm:px-6">
-                    <SectionTitle title={sections[currentSection]?.title} />
-                    <ContentSection
-                        title={sections[currentSection]?.title || ''}
-                        points={sections[currentSection]?.points || []}
-                    />
-                </div>
-            </MotionDiv>
-            <NavigationControls
-                currentSection={currentSection}
-                totalSections={sections.length}
-                onPrevious={handlePrevious}
-                onNext={handleNext}
-                onSectionSelect={handleSelectionSelect}
-            />
-        </Card>
-    );
+  return (
+    <Card className="relative px-2 h-[500px] sm:h-[600px] lg:h-[700px] w-full xl:w-[600px] overflow-hidden bg-linear-to-br from-background via-background/95 to-rose-500/5 backdrop-blur-lg shadow-2xl rounded-3xl border border-rose-500/10">
+      <ProgressBar sections={sections} currentSection={currentSection} />
+      <MotionDiv
+        key={currentSection}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        exit={{ opacity: 0 }}
+        className="h-full overflow-y-auto scrollbar-hide pt-12 sm:pt-16 pb-20 sm:pb-24"
+      >
+        <div className="px-4 sm:px-6">
+          <SectionTitle title={sections[currentSection]?.title} />
+          <ContentSection
+            title={sections[currentSection]?.title || ''}
+            points={sections[currentSection]?.points || []}
+          />
+        </div>
+      </MotionDiv>
+      <NavigationControls
+        currentSection={currentSection}
+        totalSections={sections.length}
+        onPrevious={handlePrevious}
+        onNext={handleNext}
+        onSectionSelect={handleSelectionSelect}
+      />
+    </Card>
+  );
 }

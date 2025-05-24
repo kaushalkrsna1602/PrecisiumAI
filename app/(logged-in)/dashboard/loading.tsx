@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-import BgGradient from "@/components/common/bg-gradient"
+import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import BgGradient from '@/components/common/bg-gradient';
 
 export default function DashboardLoading() {
   return (
@@ -38,5 +38,5 @@ export default function DashboardLoading() {
         </div>
       </div>
     </main>
-  )
+  );
 }

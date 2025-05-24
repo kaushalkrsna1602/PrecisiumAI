@@ -41,7 +41,9 @@ const StatusBadge = ({ status }: { status: string }) => {
     <span
       className={cn(
         'px-3 py-1 text-xs font-medium rounded-full capitalize',
-        status === 'completed' ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800",
+        status === 'completed'
+          ? 'bg-green-100 text-green-800'
+          : 'bg-yellow-100 text-yellow-800'
       )}
     >
       {status}
@@ -55,7 +57,11 @@ export default function SummaryCard({ summary }: { summary: any }) {
       variants={itemVariants}
       initial="hidden"
       animate="visible"
-      whileHover={{scale: 1.02, transition: { duration: 0.2 , ease: 'easeInOut' }}}>
+      whileHover={{
+        scale: 1.02,
+        transition: { duration: 0.2, ease: 'easeInOut' },
+      }}
+    >
       <Card className="relative h-full">
         <div className="absolute top-2 right-2">
           <DeleteButton summaryId={summary.id} />

@@ -1,6 +1,6 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import { FileText } from "lucide-react";
-import BgGradient from "@/components/common/bg-gradient";
+import { Skeleton } from '@/components/ui/skeleton';
+import { FileText } from 'lucide-react';
+import BgGradient from '@/components/common/bg-gradient';
 
 export default function SummaryPageLoading() {
   return (

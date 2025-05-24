@@ -1,5 +1,5 @@
-import Stripe from "stripe";
-import { getDbConnection } from "./db";
+import Stripe from 'stripe';
+import { getDbConnection } from './db';
 
 export async function handleCheckoutSessionCompleted({
   session,
@@ -124,7 +124,7 @@ export async function handleSubscriptionDeleted({
       SET status = 'cancelled'
       WHERE customer_id = ${customerId}
     `;
-    console.log('User status updated to cancelled'); 
+    console.log('User status updated to cancelled');
   } catch (error) {
     console.error('Error handling subscription deleted:', error);
     throw error;

@@ -26,19 +26,23 @@ export default async function PlanBadge() {
     planName = plan.name;
   }
 
-  return <Badge
-  variant="outline"
-  className={cn(
-    'ml-2 bg-linear-to-r items-center hidden lg:flex flex-row',
-    priceId ? 'from-amber-100 to-amber-200 border-amber-300' : 'from-red-100 to-red-200 border-red-300'
-  )}
->
-  <Crown
-    className={cn(
-      'w-3 h-3 mr-1',
-      priceId ? 'text-amber-600' : 'text-red-600'
-    )}
-  />
-  {planName}
-</Badge>;
+  return (
+    <Badge
+      variant="outline"
+      className={cn(
+        'ml-2 bg-linear-to-r items-center hidden lg:flex flex-row',
+        priceId
+          ? 'from-amber-100 to-amber-200 border-amber-300'
+          : 'from-red-100 to-red-200 border-red-300'
+      )}
+    >
+      <Crown
+        className={cn(
+          'w-3 h-3 mr-1',
+          priceId ? 'text-amber-600' : 'text-red-600'
+        )}
+      />
+      {planName}
+    </Badge>
+  );
 }
