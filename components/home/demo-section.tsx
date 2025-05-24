@@ -3,61 +3,50 @@ import { SummaryViewer } from '../summaries/summary-viewer';
 import { MotionDiv, MotionH3 } from '../common/motion-wrapper';
 
 const DEMO_SUMMARY = `# Quick Overview
-🎯 Comprehensive Next.js 15 course covering everything from fundamentals to advanced deployment strategies.
+🧠 Explores the principles and techniques for fostering creative and unconventional thinking.
 
 # Document Details
-📑 Type: Technical Course
-👥 For: Web Developers & React Engineers
+📄 Type: Self-Help/Business
+🧑‍🤝‍🧑 For: Individuals, Teams, Leaders
 
 # Key Highlights
-🚀 Complete guide to Next.js 15's App Router
-⭐ Server Components & Server Actions deep dive
-💫 Full-stack application development with Next.js
+💡 Practical exercises to stimulate creative problem-solving
+🔓 Strategies to break free from conventional thought patterns
+🌟 Real-world examples of innovative breakthroughs
 
 # Why It Matters
-➡️ Next.js is becoming the industry standard for React
-applications, offering superior performance, SEO, and
-developer experience. This course provides the essential
-knowledge needed to build modern web applications.
+➡️ In today's rapidly evolving world, the ability to think differently is crucial for innovation, problem-solving, and staying ahead of the curve in both personal and professional life.
 
 # Main Points
 
-➡️ Modern application architecture with App Router
+➡️ Understanding the barriers to creative thinking
 
-➡️ Server and Client Components best practices
+➡️ Techniques for brainstorming and idea generation
 
-➡️ Data fetching patterns and caching strategies
+➡️ Cultivating a mindset that embraces novelty
 
-➡️ Authentication and API route implementation
+➡️ Evaluating and implementing unconventional solutions
 
-➡️ Responsive design and component libraries
+➡️ Fostering a culture of innovation within teams
 
 # Pro Tips
-📌 Always consider server components as your default choice
-
-📌 Implement route groups for better code organization
-
-📌 Use loading.tsx and error.tsx for better UX
+🔑 Challenge your assumptions regularly
+✍️ Practice divergent thinking exercises
+🗣️ Seek diverse perspectives
+🌱 Create a safe space for experimentation
 
 # Key Terms to Know
 
-📚 Server Components: React components that render on the server for better performance
-
-🔍 Route Groups: Next.js feature for organizing routes without affecting URL structure
-
-🎯 Streaming: Technique for progressively rendering UI components
-
-🔄 Suspense: React feature for handling loading states
+✨ Divergent Thinking: Generating multiple creative ideas
+🧱 Cognitive Bias: Systematic patterns of deviation from norm or rationality in judgment
+🔄 Reframing: Looking at a situation from a different perspective
+🚀 Innovation: Creating and implementing new ideas or methods
 
 # Bottom Line
-✅ Master Next.js 15 to build fast, scalable, and
-SEO-friendly web applications with the latest React
-features and best practices.
+✅ Learn to unlock your creative potential and approach challenges with fresh perspectives, leading to innovative solutions and breakthroughs.
 
 # Final Thoughts
-This course transforms developers into Next.js experts,
-enabling them to build production-ready applications with
-confidence and efficiency.`;
+Developing an "out-of-the-box" mindset is a valuable skill that can be cultivated through conscious effort and the application of specific techniques. This guide provides the tools to embark on that journey.`;
 
 export default function DemoSection() {
   return (
@@ -88,7 +77,7 @@ export default function DemoSection() {
             >
               Watch how Precisium transforms{' '}
               <span className="bg-linear-to-r from-red-500 to-rose-700 bg-clip-text text-transparent">
-                this Next.js course PDF
+                this How TO THINK PDF
               </span>{' '}
               into an easy-to-read summary!
             </MotionH3>
