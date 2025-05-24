@@ -9,11 +9,13 @@ import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-export default async function SummaryPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface SummaryPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function SummaryPage({ params }: SummaryPageProps) {
   const { id } = params;
 
   const summary = await getSummaryById(id);
@@ -31,7 +33,7 @@ export default async function SummaryPage({
     original_file_url,
   } = summary;
 
-  const readingTime = Math.ceil(word_count / 200); // Assuming an average reading speed of 200 words per minute
+  const readingTime = Math.ceil(word_count / 200); // Assuming average reading speed
 
   return (
     <div className="relative isolate min-h-screen bg-linear-to-b from-rose-50/40 to-white">
@@ -85,3 +87,4 @@ export default async function SummaryPage({
     </div>
   );
 }
+    
