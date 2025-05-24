@@ -1,0 +1,7 @@
+{
+    "fucntions": {
+        "app/**/*": {
+            "maxDuration": 60
+        }
+    }
+}

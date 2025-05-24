@@ -32,8 +32,8 @@ export default function UploadForm() {
                 console.error("Error occurred while uploading", err);
                 toast.error(`Upload failed: ${err.message}`);
             },
-            onUploadBegin: ({ file }) => {
-                console.log("Upload has begun for", file);
+            onUploadBegin: (data) => {
+                console.log("Upload has begun for", data);
                 toast.message("Uploading file... Please wait! 🚀");
             },
         }
@@ -63,37 +63,38 @@ export default function UploadForm() {
 
             toast.message("Uploading file... Please wait! 🚀");
 
-            const resp = await startUpload([file]);
+            const uploadResponse = await startUpload([file]);
 
-            if (!resp || !resp[0]?.serverData?.file?.url) {
+            if (!uploadResponse) {
                 toast.error("Something went wrong during upload.");
                 setIsLoading(false);
                 return;
             }
 
             toast("Processing PDF summary...");
-            const result = await generatePdfSummary(resp);
+
+            const uploadedFileUrl = uploadResponse[0].serverData.fileUrl;
+
+            const result = await generatePdfSummary({
+                fileUrl: uploadedFileUrl,  // Make sure this is the correct path
+                fileName: file.name,
+            });
 
             const { data = null, message = null } = result || {};
 
             if (data?.summary) {
                 toast("We are saving your summary! ✨");
 
-                const storeResult = await storePdfSummaryAction({
+                const storeResult : any = await storePdfSummaryAction({
                     summary: data.summary,
-                    fileUrl: resp[0].serverData.file.url,  // Make sure this is the correct path
+                    fileUrl: uploadedFileUrl,  // Make sure this is the correct path
                     title: data.title,
                     fileName: file.name,
                 });
 
-                if (storeResult.success) {
-                    toast.success("Summary generated and saved successfully! 🎉");
-                    formRef.current?.reset();
-                    // redirect to the summary page or show a success message 
-                    router.push(`/summaries/${storeResult.data.id}`);
-                } else {
-                    toast.error(storeResult.message || "Failed to save summary.");
-                }
+                toast.success("Summary generated and saved successfully! 🎉");
+                formRef.current?.reset();
+                router.push(`/summaries/${storeResult.data.id}`);
             } else {
                 toast.error(message || "Failed to generate summary.");
             }

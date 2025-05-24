@@ -18,8 +18,8 @@ const fontSans = FontSans({
 // });
 
 export const metadata: Metadata = {
-  title: "Sommaire",
-  description: "App for pdf summarization", 
+  title: "Precisium AI",
+  description: "Effortlessly understand lengthy PDFs with this AI-powered summarization app. Extract key insights and save valuable time by getting concise summaries of your documents in seconds.", 
 };
 
 export default function RootLayout({
