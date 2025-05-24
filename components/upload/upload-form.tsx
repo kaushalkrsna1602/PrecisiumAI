@@ -29,7 +29,7 @@ export default function UploadForm() {
 
   const { startUpload } = useUploadThing('pdfUploader', {
     onClientUploadComplete: () => {
-      console.log('Uploaded successfully!');
+      // console.log('Uploaded successfully!');
       toast.success('File uploaded successfully!');
     },
     onUploadError: (err) => {
@@ -37,14 +37,14 @@ export default function UploadForm() {
       toast.error(`Upload failed: ${err.message}`);
     },
     onUploadBegin: (data) => {
-      console.log('Upload has begun for', data);
+      // console.log('Upload has begun for', data);
       toast.message('Uploading file... Please wait! 🚀');
     },
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(isLoading);
+    // console.log(isLoading);
 
     try {
       setIsLoading(true);

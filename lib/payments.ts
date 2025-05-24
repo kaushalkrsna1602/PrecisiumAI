@@ -8,7 +8,7 @@ export async function handleCheckoutSessionCompleted({
   session: Stripe.Checkout.Session;
   stripe: Stripe;
 }) {
-  console.log('Checkout session completed:', session);
+  // console.log('Checkout session completed:', session);
   const customerId = session.customer as string;
   const customer = await stripe.customers.retrieve(customerId);
   const priceId = session.line_items?.data[0]?.price?.id;
@@ -111,7 +111,7 @@ export async function handleSubscriptionDeleted({
   subscriptionId: string;
   stripe: Stripe;
 }) {
-  console.log('Subscription deleted:', subscriptionId);
+  // console.log('Subscription deleted:', subscriptionId);
 
   try {
     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
@@ -124,7 +124,7 @@ export async function handleSubscriptionDeleted({
       SET status = 'cancelled'
       WHERE customer_id = ${customerId}
     `;
-    console.log('User status updated to cancelled');
+    // console.log('User status updated to cancelled');
   } catch (error) {
     console.error('Error handling subscription deleted:', error);
     throw error;

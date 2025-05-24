@@ -41,12 +41,12 @@ export async function generatePdfSummary({
 
   try {
     const pdfText = await fetchAndExtractPdfText(fileUrl);
-    console.log({ pdfText });
+    // console.log({ pdfText });
 
     let summary;
     try {
       summary = await generateSummaryFromGemini(pdfText);
-      console.log({ summary });
+      // console.log({ summary });
     } catch (error) {
       console.log(error);
       // call OPEN AI
